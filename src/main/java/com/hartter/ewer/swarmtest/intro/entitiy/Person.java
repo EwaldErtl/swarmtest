@@ -5,16 +5,32 @@
  */
 package com.hartter.ewer.swarmtest.intro.entitiy;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
  * @author eertl
  */
-public class Person {
+@Entity
+@Table(name = "MYPERSON")
+@NamedQueries({  
+    @NamedQuery(name=Person.FINDALL, 
+            query = "select p from Person p")
+})
+public class Person implements Serializable {
+    
+    public static final String FINDALL = "findAll";
+    
     
     private String firstName;
+    @Id
     private String lastName;
     private Calendar birthDate;
 

@@ -5,12 +5,14 @@
  */
 package com.hartter.ewer.swarmtest.intro.boundary;
 
+import com.hartter.ewer.swarmtest.intro.boundary.controller.PersonController;
 import com.hartter.ewer.swarmtest.intro.entitiy.Person;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
+import javax.inject.Inject;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -27,6 +29,9 @@ import javax.ws.rs.PUT;
 @Path("resource")
 public class PersonResource {
 
+    @Inject
+    PersonController pc;
+    
     @Context
     private UriInfo context;
 
@@ -43,17 +48,18 @@ public class PersonResource {
     @GET
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public List<Person> geAllPersons() {
-        
-        Person[] p = new Person[5];
-        String[] pNames = { "one", "two", "three", "four", "five" };
-        
-        for(int i=0;i<5;i++) {
-            Calendar cal = Calendar.getInstance();
-            cal.set(1970+i, i, i);
-            p[i] = new Person(pNames[i], pNames[i], cal );
-        }
-        
-        return Arrays.asList(p);
+//        
+//        Person[] p = new Person[5];
+//        String[] pNames = { "one", "two", "three", "four", "five" };
+//        
+//        for(int i=0;i<5;i++) {
+//            Calendar cal = Calendar.getInstance();
+//            cal.set(1970+i, i, i);
+//            p[i] = new Person(pNames[i], pNames[i], cal );
+//        }
+//        
+//        return Arrays.asList(p);
+         return pc.getAllPersons();
     }
 
     /**
