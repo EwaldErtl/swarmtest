@@ -7,7 +7,6 @@ package com.hartter.ewer.swarmtest.intro.boundary.controller;
 
 import com.hartter.ewer.swarmtest.intro.entitiy.Person;
 import java.util.List;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -16,15 +15,17 @@ import javax.persistence.PersistenceContext;
  * @author eertl
  */
 
-
-public class PersonController {
+public class PersonController {        
         
-        
-    @PersistenceContext
+    @PersistenceContext(unitName = "swarmPU")
     EntityManager em; 
     
     
     public List<Person> getAllPersons() {       
         return em.createNamedQuery(Person.FINDALL).getResultList();
+    }
+    
+    public void putPerson(Person p) {
+        em.merge(p);
     }
 }
